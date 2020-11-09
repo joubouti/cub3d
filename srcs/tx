@@ -1,0 +1,119 @@
+void	ft_test(int x, int y, int i, t_vector2 r)
+{
+	float	dis;
+	float	a;
+	t_vector2 d;
+	t_vector2 dc;
+	int		m;
+	// float	r;
+
+	d = (t_vector2){g_g.pos.x - x, g_g.pos.y - y};
+	dc = (t_vector2){g_g.pos.x - (r.x * 64 + 32), g_g.pos.y - (r.y * 64 + 32)};
+	// (rx > 0 && g_g.maze[rx - 1][ry] == 2) ? rx-- :(
+	// (ry > 0 && g_g.maze[rx][ry - 1] == 2) ? ry-- :(
+	// (rx > 0 && ry > 0 && g_g.maze[rx - 1][ry - 1] == 2) ? (rx-- && ry--) : 0));
+	// g_a = atan((g_g.pos.y - (r.y * 64 + 32)) / (g_g.pos.x - (r.x * 64 + 32))) * g_rd;
+	// g_a = dc.x > 0 ? (90 + (atan(fabs(dc.x / dc.y)) * g_rd)) : atan(fabs(dc.y / dc.x)) * g_rd;
+	// a
+	g_a = atan2(dc.y, dc.x) * g_rd + 180;
+	if (x % 64)
+		dis = (sqrt(pow(32, 2) + pow((r.x * 64 + 32) - g_g.pos.x, 2)));
+	else if (y % 64)
+		dis = (sqrt(pow(32, 2) + pow((r.y * 64 + 32) - g_g.pos.y, 2)));
+	// g_a = atan((g_g.pos.y - (r.y * 64 + 32)) / (g_g.pos.x - (r.x * 64 + 32))) * g_rd;
+	// g_a < 0 ? g_a = 180 + g_a : 0;
+	// g_a > 45 ? g_a = 90 - g_a : 0;
+	// g_a += g_a > 0 ? 0 : 90;
+	a = g_a;
+	// g_m = g_a > 45 ? 1 &&
+	// (g_a = 90 - g_a) : -1;
+
+	// g_b = d.x < 0 ? atan(d.y / d.x) * g_rd : 90 - atan(d.x / d.y) * g_rd;
+	g_b = atan2(d.y, d.x) * g_rd + 180;
+
+	// g_b = atan((g_g.pos.y - (float)y) / (g_g.pos.x - (float)x)) * g_rd;
+	// g_b = (int)g_b % 90;
+	// g_b < 0 ? g_b = 180 + g_b : 0;
+
+	// g_b += g_b > 0 ? -90 : 90;
+	// g_m *= g_b > 45 ? 1 &&
+	// (g_b = 90 - g_b) : -1;
+		// g_b > 45 ? g_b = 90 - g_b : 0;
+		// g_b < -45 ? g_b = 90 - 2 * g_b : 0;
+	// a > 45 ? a = 90 - a: 0;
+	// g_b = g_a - g_b;
+	// dis = 32 / (g_a < 135 && g_a > 45 ? cos(g_a * g_dg) : sin((g_a) * g_dg));
+	// dis = 32 / cos(fmod(g_a, 45) * g_dg);
+	// g_b = d;
+	a = fmod(g_a, 90);
+	dis = 32 / cos(((a > 45) ? (90 - a) : a) * g_dg);
+	g_al = dis;
+	g_al = (sqrt(pow(dc.x, 2) + pow(dc.y, 2)));
+	g_al = atan(dis / g_al) * g_rd;
+
+	// g_al = g_b - g_a;
+	// g_al = ((int)g_a + 180) % 360 - 180;
+	// g_al = fmod(g_a - g_b, 360.0);
+	// g_al = (g_al<-180)?g_al+360:((g_al>=180)?g_al-360:g_al);
+	// g_al += (g_al>180) ? -360 : ((g_al<-180) ? 360 : 0);
+		// r = fmod(g_b - g_a,360.0);
+		// r = (g_al<-180)?g_al+360:((g_al>=180)?g_al-360:g_al);
+	// g_al = atan(sin(g_a - g_b) / cos(g_a - g_b)) * g_rd;
+	// g_al += g_al < -180 ? 360 : 0;
+
+
+//calculate sign
+
+	// g_al = atan(dis / g_al) * g_rd;
+	// m = g_a > g_b ? -1 : 1;
+	// g_al = (fabs(g_b) - fabs(g_a))/ g_al;
+	// g_b = x;
+
+}
+
+
+int		ft_check_sprite(int x, int y, int i)
+{
+	int		rx;
+	int		ry;
+	float	d;
+	float	a;
+
+	rx = x / 64;
+	ry = y / 64;
+	// if (g_g.maze[rx][ry] == 2 || (rx > 0 && g_g.maze[rx - 1][ry] == 2)
+	// || (ry > 0 && g_g.maze[rx][ry - 1] == 2) || (rx > 0 && ry > 0 &&
+	// g_g.maze[rx - 1][ry - 1] == 2))
+	// {
+		// d = sqrt(pow(x - g_g.pos.x, 2) + pow(y - g_g.pos.y, 2));
+		// printf("%d|", d);
+		// g_a = fabs(cos(2 * g_g.rot - 90) * 100);
+		// g_a = 32 / cos(((abs((int)g_g.rot)) % 90) * g_dg);
+		// a = abs((g_g.win_w / 2) - i);
+		// d = (int)(g_g.rot + ((float)a / g_g.win_h) * g_g.fov) % 90;
+		// a = ((float)d / WINW) * g_g.fov;
+		// a = ((int)g_g.rot + ) * g_g.fov;
+		// printf("%f|", a);
+			// mlx_string_put(g_g.mlx_ptr, g_g.win_ptr, 20, 20, 0x0000FF00,
+			// ft_itoa(d));
+		if (i == 0)
+		{
+			if (x % 64 == 0 && g_g.maze[rx][ry] == 2)
+				ft_test(x, y, i, (t_vector2){rx, ry});
+			else if (x % 64 == 0 && rx > 0 && g_g.maze[rx - 1][ry] == 2)
+				ft_test(x, y, i, (t_vector2){rx - 1, ry});
+			else if (y % 64 == 0 && ry > 0 && g_g.maze[rx][ry - 1] == 2)
+				ft_test(x, y, i, (t_vector2){rx, ry - 1});
+			else if (x % 64 == 0 && y % 64 == 0 && rx > 0 && ry > 0 && g_g.maze[rx - 1][ry - 1] == 2)
+				ft_test(x, y, i, (t_vector2){rx - 1, ry - 1});
+			// (rx > 0 && g_g.maze[rx - 1][ry] == 2) ? rx-- :(
+			// (ry > 0 && g_g.maze[rx][ry - 1] == 2) ? ry-- :(
+			// (rx > 0 && ry > 0 && g_g.maze[rx - 1][ry - 1] == 2) ? (rx-- && ry--) : 0));
+			// g_b = 32 / cos(((int)g_a) * g_dg);
+		}
+		// if (i == 0)
+		// 	printf("%f", atan(fabs(g_g.pos.x - x) / fabs(g_g.pos.y - y)));
+		// return (0);
+	// }
+	return (1);
+}
